@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  mysqlbackup:
+    build:
+      context: ./bin
+    container_name: container_backup
+    networks:
+      - container_default
+    volumes:
+      - ./data/backup:/backup
+    environment:
+      - DB_SERVER=mysql
+      - DB_USER=root
+      - DB_PASS=root
+      - DB_DUMP_BY_SCHEMA=true
+    external_links:
+      - mysql
+networks:
+  container_default:
+    external: true
+
